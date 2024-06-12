@@ -6,6 +6,7 @@ import UserRouter from "./app/config/modules/usersmodules/user.routes";
 import RoomRouter from "./app/config/modules/roomsmodules/room.routes";
 import notFoundHandler from "./middlewares/notFound.middleware";
 import errorHandler from "./middlewares/error.middleware";
+import SlotRouter from "./app/config/modules/slotmodules/slot.routes";
  
 
 const app: Application = express();
@@ -18,10 +19,11 @@ app.use(cors());
 // Routes
 app.use('/api', UserRouter);
 app.use('/api', RoomRouter);
+app.use('/api', SlotRouter);
 
-app.use(notFoundHandler);
 
 // Error Handler
+app.use(notFoundHandler);
 app.use(errorHandler);
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to hotel management server");

@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-// Define an interface for the user object
+
 interface User {
-  role: string; // Assuming role is a string, modify as per your user schema
-  // Add other properties if needed
+  role: string; 
+ 
 }
 
 export const authenticate = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
@@ -22,7 +22,7 @@ export const authenticate = (req: Request & { user?: User }, res: Response, next
 
   try {
     const decoded: JwtPayload = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret") as JwtPayload;
-    req.user = decoded as User; // Cast JwtPayload to User type
+    req.user = decoded as User; 
     next();
   } catch (error) {
     return res.status(401).json({
@@ -35,7 +35,7 @@ export const authenticate = (req: Request & { user?: User }, res: Response, next
 
 export const authenticateAdmin = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
   authenticate(req, res, () => {
-    // Check if user object exists and has role property
+   
     if (req.user && req.user.role !== "admin") {
       return res.status(403).json({
         success: false,

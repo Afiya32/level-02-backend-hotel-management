@@ -1,10 +1,9 @@
 // server.ts
 
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import app from "./app";
 import config from "./app/config";
 import mongoose from "mongoose";
-
 
 dotenv.config();
 async function main() {
@@ -15,7 +14,7 @@ async function main() {
       console.log(`Hotel management app listening on port ${config.port}`);
     });
   } catch (error) {
-    console.log(error);
+    console.error("Failed to connect to MongoDB:", error);
   }
 }
 main();

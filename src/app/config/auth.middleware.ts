@@ -17,7 +17,7 @@ export const authenticateAdmin = (req: Request, res: Response, next: NextFunctio
     if (decoded.role !== "admin") {
       return res.status(403).json({ message: "Forbidden" });
     }
-    req.user = decoded; // Add decoded JWT payload to the req.user
+    req.user = decoded; 
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized" });
