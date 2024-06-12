@@ -11,6 +11,7 @@ const getRoomById = async (id: string) => {
   return result;
 };
 
+
 const getAllRooms = async () => {
   const result = await RoomModel.find({ isDeleted: false });
   return result;

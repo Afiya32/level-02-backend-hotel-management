@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { RoomServices } from "./room.services";
 
 
-const createRoom = async (req: Request, res: Response) => {
+const createRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const room = req.body;
     const result = await RoomServices.createRoomDB(room);
@@ -12,68 +12,91 @@ const createRoom = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-const getRoom = async (req: Request, res: Response) => {
+const getRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params;
-    const result = await RoomServices.getRoomById(id);
+    const room = await RoomServices.getRoomById(req.params.id);
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        statusCode: 404,
+        message: "No Data Found",
+        data: []
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Room retrieved successfully',
-      data: result,
+      data: room,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-const getAllRooms = async (req: Request, res: Response) => {
+const getAllRooms = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await RoomServices.getAllRooms();
+    const rooms = await RoomServices.getAllRooms();
+    if (rooms.length === 0) {
+      return res.status(404).json({
+        success: false,
+        statusCode: 404,
+        message: "No Data Found",
+        data: []
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Rooms retrieved successfully',
-      data: result,
+      data: rooms,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-const updateRoom = async (req: Request, res: Response) => {
+const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params;
-    const updatedData = req.body;
-    const result = await RoomServices.updateRoom(id, updatedData);
+    const room = await RoomServices.updateRoom (req.params.id, req.body);
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        statusCode: 404,
+        message: "No Data Found",
+        data: []
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Room updated successfully',
-      data: result,
+      data: room,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
-const deleteRoom = async (req: Request, res: Response) => {
+const deleteRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params;
-    const result = await RoomServices.deleteRoom(id);
+    const room = await RoomServices.deleteRoom(req.params.id);
+    if (!room) {
+      return res.status(404).json({
+        success: false,
+        statusCode: 404,
+        message: "No Data Found",
+        data: []
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Room deleted successfully',
-      data: result,
+      data: room,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error);
   }
 };
 
