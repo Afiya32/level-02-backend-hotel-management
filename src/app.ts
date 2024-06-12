@@ -3,6 +3,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import UserRouter from "./app/config/modules/usersmodules/user.routes";
+import RoomRouter from "./app/config/modules/roomsmodules/room.routes";
  
 
 const app: Application = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 // Routes
 app.use('/api', UserRouter);
+app.use('/api', RoomRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to hotel management server");
 });
