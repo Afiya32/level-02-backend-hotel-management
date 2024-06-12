@@ -1,6 +1,6 @@
+// user validation
 
 import { z } from "zod";
-
 
 export const userSignupSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -10,7 +10,6 @@ export const userSignupSchema = z.object({
   address: z.string().min(1, "Address is required"),
   role: z.enum(["user", "admin"])
 });
-
 
 export const userLoginSchema = z.object({
   email: z.string().email("Invalid email format"),

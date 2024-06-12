@@ -1,7 +1,6 @@
-import { Schema, model, connect } from "mongoose";
+// user model
+import { Schema, model } from "mongoose";
 import { Users } from "./user.interface";
-
-
 
 const userSchema = new Schema<Users>({
   name: { type: String, required: true },

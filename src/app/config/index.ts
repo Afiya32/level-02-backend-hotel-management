@@ -1,9 +1,10 @@
-import dotenv from "dotenv";
-import path from "path";
+// index.ts
 
-dotenv.config({ path: path.join((process.cwd(), ".env")) });
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default {
-  port: process.env.PORT,
-  database_url: process.env.DATABASE_URL
+  port: process.env.PORT || 3000,
+  database_url: process.env.DATABASE_URL,
+  jwt_secret: process.env.JWT_SECRET
 };

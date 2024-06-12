@@ -1,8 +1,7 @@
-import express from "express"
-import { UserController } from "./user.controller"
+// user routes
 
-
-
+import express from "express";
+import { UserController } from "./user.controller";
 import { z } from 'zod';
 import { userLoginSchema, userSignupSchema } from "./user.validation";
 

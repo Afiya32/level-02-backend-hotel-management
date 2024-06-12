@@ -1,3 +1,5 @@
+// user controller
+
 import { Request, Response } from "express";
 import { UserServices } from "./user.service";
 import bcrypt from 'bcryptjs';

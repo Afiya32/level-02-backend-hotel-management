@@ -1,6 +1,7 @@
+// user service
+
 import { Users } from "./user.interface";
 import { UsersModel } from "./user.model";
-
 import bcrypt from 'bcryptjs';
 
 const createUserDB = async (user: Users) => {
