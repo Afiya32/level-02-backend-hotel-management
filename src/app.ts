@@ -7,6 +7,7 @@ import RoomRouter from "./app/config/modules/roomsmodules/room.routes";
 import notFoundHandler from "./middlewares/notFound.middleware";
 import errorHandler from "./middlewares/error.middleware";
 import SlotRouter from "./app/config/modules/slotmodules/slot.routes";
+import BookingRouter from "./app/config/modules/bookingmodules/booking.routes";
  
 
 const app: Application = express();
@@ -20,6 +21,7 @@ app.use(cors());
 app.use('/api', UserRouter);
 app.use('/api', RoomRouter);
 app.use('/api', SlotRouter);
+app.use('/api', BookingRouter);
 
 
 // Error Handler
