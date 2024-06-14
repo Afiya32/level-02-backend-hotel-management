@@ -6,7 +6,8 @@ import { RoomModel } from '../roomsmodules/room.model';
 import slotModel from '../slotmodules/slot.model';
 import { Booking } from './booking.inerface';
 
-export const createBooking = async (req: Request, res: Response, next: NextFunction) => {
+// create booking
+const createBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { date, slots, room, user } = req.body;
 
@@ -46,7 +47,8 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
     }
 };
 
-export const getAllBookings = async (req: Request, res: Response, next: NextFunction) => {
+// get all booking
+ const getAllBookings = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const bookings = await BookingModel.find().populate('room').populate('slots').populate('user');
         res.status(200).json({
@@ -59,7 +61,8 @@ export const getAllBookings = async (req: Request, res: Response, next: NextFunc
     }
 };
 
-export const getUserBookings = async (req: Request, res: Response, next: NextFunction) => {
+// get user booking 
+ const getUserBookings = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = (req.user as any)._id;
         const bookings = await BookingModel.find({ user: userId }).populate('room').populate('slots').populate('user');
@@ -73,7 +76,8 @@ export const getUserBookings = async (req: Request, res: Response, next: NextFun
     }
 };
 
-export const updateBooking = async (req: Request, res: Response, next: NextFunction) => {
+// update booking
+ const updateBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const bookingId = req.params.id;
         const updates = req.body;
@@ -88,7 +92,8 @@ export const updateBooking = async (req: Request, res: Response, next: NextFunct
     }
 };
 
-export const deleteBooking = async (req: Request, res: Response, next: NextFunction) => {
+// delete booking
+ const deleteBooking = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const bookingId = req.params.id;
         const deletedBooking = await BookingModel.findByIdAndUpdate(bookingId, { isDeleted: true }, { new: true });
@@ -101,3 +106,10 @@ export const deleteBooking = async (req: Request, res: Response, next: NextFunct
         next(error);
     }
 };
+ export const bookingController={
+    deleteBooking,
+    updateBooking,
+    getAllBookings,
+    getUserBookings,
+    createBooking
+ }

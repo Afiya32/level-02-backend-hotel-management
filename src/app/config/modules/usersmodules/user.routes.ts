@@ -3,7 +3,7 @@
 import express from "express";
 import { UserController } from "./user.controller";
 import { z } from 'zod';
-import { userLoginSchema, userSignupSchema } from "./user.validation";
+import { userValidation } from "./user.validation";
 
 const UserRouter = express.Router();
 
@@ -21,9 +21,9 @@ const validate = (schema: z.ZodSchema<any>) => (req: express.Request, res: expre
 };
 
 // User signup route
-UserRouter.post('/auth/signup', validate(userSignupSchema), UserController.createUser);
+UserRouter.post('/auth/signup', validate(userValidation.userSignupSchema), UserController.createUser);
 
 // User login route
-UserRouter.post('/auth/login', validate(userLoginSchema), UserController.loginUser);
+UserRouter.post('/auth/login', validate(userValidation.userLoginSchema), UserController.loginUser);
 
 export default UserRouter;

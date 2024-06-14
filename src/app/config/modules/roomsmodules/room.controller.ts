@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import { RoomServices } from "./room.services";
 
 
+
+// create room
 const createRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const room = req.body;
@@ -15,7 +17,7 @@ const createRoom = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
+// get single room
 const getRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const room = await RoomServices.getRoomById(req.params.id);
@@ -36,7 +38,7 @@ const getRoom = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
+// get all room
 const getAllRooms = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const rooms = await RoomServices.getAllRooms();
@@ -57,7 +59,7 @@ const getAllRooms = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
+// update room 
 const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const room = await RoomServices.updateRoom (req.params.id, req.body);
@@ -78,7 +80,7 @@ const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
-
+// delete room
 const deleteRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const room = await RoomServices.deleteRoom(req.params.id);

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { z, ZodSchema } from "zod";
 
-export const validate = (schema: ZodSchema<any>) => (req: Request, res: Response, next: NextFunction) => {
+const validate = (schema: ZodSchema<any>) => (req: Request, res: Response, next: NextFunction) => {
   try {
     schema.parse(req.body);
     next();
@@ -12,3 +12,6 @@ export const validate = (schema: ZodSchema<any>) => (req: Request, res: Response
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+export default validate;

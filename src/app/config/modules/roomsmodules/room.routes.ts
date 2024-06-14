@@ -3,8 +3,9 @@ import { RoomController } from "./room.controller";
 
 import { roomSchema } from "./room.validation";
 
-import { validate } from "../../../../middlewares/validate.middleware";
+
 import { authenticateAdmin } from "../../auth.middleware";
+import validate from "../../../../middlewares/validate.middleware";
 
 const RoomRouter = express.Router();
 

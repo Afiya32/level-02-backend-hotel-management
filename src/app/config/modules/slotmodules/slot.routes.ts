@@ -1,14 +1,15 @@
 // slot.routes.ts
 
 import express from 'express';
-import { createSlot, getAvailableSlots } from './slot.controller';
+import { slotController } from './slot.controller';
+
 
 const SlotRouter = express.Router();
 
 // Route for creating a slot
-SlotRouter.post('/slots', createSlot);
+SlotRouter.post('/slots', slotController.createSlot);
 
 // Route for getting available slots
-SlotRouter.get('/slots/availability', getAvailableSlots);
+SlotRouter.get('/slots/availability', slotController.getAvailableSlots);
 
 export default SlotRouter;

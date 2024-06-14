@@ -1,3 +1,5 @@
+// room model
+
 import { Schema, model } from 'mongoose';
 import { Room } from './room.interface';
 

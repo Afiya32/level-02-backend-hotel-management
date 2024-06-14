@@ -3,26 +3,60 @@
 import { Booking } from './booking.inerface';
 import BookingModel from './booking.model';
 
-
-export const createBookingService = async (bookingData: Booking) => {
+// create booking
+ const createBookingService = async (bookingData: Booking) => {
+   try {
     const booking = new BookingModel(bookingData);
     await booking.save();
     return booking;
+    
+   } catch (error) {
+    throw(error)
+   }
 };
 
-export const getAllBookingsService = async () => {
-    return await BookingModel.find().populate('room').populate('slots').populate('user');
+// get all booking
+ const getAllBookingsService = async () => {
+    try {
+        return await BookingModel.find().populate('room').populate('slots').populate('user');
+    } catch (error) {
+        throw(error)
+    }
 };
 
-export const getUserBookingsService = async (userId: string) => {
-    return await BookingModel.find({ user: userId }).populate('room').populate('slots').populate('user');
+// get user booking 
+ const getUserBookingsService = async (userId: string) => {
+    try {
+        return await BookingModel.find({ user: userId }).populate('room').populate('slots').populate('user');
+    } catch (error) {
+        throw(error)
+    }
 };
 
-export const updateBookingService = async (bookingId: string, updates: Partial<Booking>) => {
+// update booking
+const updateBookingService = async (bookingId: string, updates: Partial<Booking>) => {
+   try {
     return await BookingModel.findByIdAndUpdate(bookingId, updates, { new: true });
+   } catch (error) {
+    throw(error)
+   }
 };
 
-export const deleteBookingService = async (bookingId: string) => {
+// update booking
+ const deleteBookingService = async (bookingId: string) => {
+   try {
     return await BookingModel.findByIdAndUpdate(bookingId, { isDeleted: true }, { new: true });
+   } catch (error) {
+    throw(error)
+    
+   }
 };
 
+export const bookingServices={
+    deleteBookingService,
+    updateBookingService,
+    getUserBookingsService,
+    getAllBookingsService,
+    createBookingService
+
+}

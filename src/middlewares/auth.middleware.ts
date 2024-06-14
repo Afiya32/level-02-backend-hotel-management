@@ -7,7 +7,7 @@ interface User {
  
 }
 
-export const authenticate = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
+ const authenticate = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -33,7 +33,7 @@ export const authenticate = (req: Request & { user?: User }, res: Response, next
   }
 };
 
-export const authenticateAdmin = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
+ const authenticateAdmin = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
   authenticate(req, res, () => {
    
     if (req.user && req.user.role !== "admin") {
@@ -46,3 +46,8 @@ export const authenticateAdmin = (req: Request & { user?: User }, res: Response,
     next();
   });
 };
+
+export const authMiddleWare={
+  authenticateAdmin,
+  authenticate
+}

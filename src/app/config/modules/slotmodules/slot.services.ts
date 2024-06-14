@@ -3,7 +3,9 @@
 import { Slot } from './slot.interface';
 import SlotModel from './slot.model';
 
-export const createSlotDB = async (slotData: Slot): Promise<Slot> => {
+
+// creating slot services
+ const createSlotDB = async (slotData: Slot): Promise<Slot> => {
     try {
         const createdSlot = await SlotModel.create(slotData);
         return createdSlot;
@@ -12,7 +14,8 @@ export const createSlotDB = async (slotData: Slot): Promise<Slot> => {
     }
 };
 
-export const getAvailableSlotsDB = async (date: string, roomId?: string): Promise<Slot[]> => {
+// getting slot services
+ const getAvailableSlotsDB = async (date: string, roomId?: string): Promise<Slot[]> => {
     try {
         let query: any = { date };
         if (roomId) {
@@ -25,3 +28,7 @@ export const getAvailableSlotsDB = async (date: string, roomId?: string): Promis
         throw error;
     }
 };
+
+export const slotServices={
+    getAvailableSlotsDB,createSlotDB
+}

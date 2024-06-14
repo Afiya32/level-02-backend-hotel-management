@@ -4,20 +4,20 @@ import { Request, Response, NextFunction } from 'express';
 import SlotModel from './slot.model';
 import { Slot } from './slot.interface';
 
-
-function timeToMinutes(time: string): number {
+const timeToMinutes = (time: string) => {
     const [hours, minutes] = time.split(':').map(Number);
     return hours * 60 + minutes;
 }
 
-
-function minutesToTime(minutes: number): string {
+const minutesToTime = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
 }
 
-export const createSlot = async (req: Request, res: Response, next: NextFunction) => {
+
+// create slot for empty room
+ const createSlot = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { room, date, startTime, endTime } = req.body;
 
@@ -64,8 +64,8 @@ export const createSlot = async (req: Request, res: Response, next: NextFunction
         next(error);
     }
 };
-
-export const getAvailableSlots = async (req: Request, res: Response, next: NextFunction) => {
+// booking empty slot 
+ const getAvailableSlots = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { date, roomId } = req.query;
 
@@ -97,3 +97,6 @@ export const getAvailableSlots = async (req: Request, res: Response, next: NextF
         next(error);
     }
 };
+ export const slotController={
+    createSlot,getAvailableSlots
+ }

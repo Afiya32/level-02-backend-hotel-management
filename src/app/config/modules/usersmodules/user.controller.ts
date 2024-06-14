@@ -5,6 +5,8 @@ import { UserServices } from "./user.service";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+
+// sign up user
 const createUser = async (req: Request, res: Response) => {
   try {
     const user = req.body;
@@ -19,7 +21,7 @@ const createUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
+// sign in user
 const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;

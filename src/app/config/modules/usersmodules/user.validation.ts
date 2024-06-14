@@ -2,7 +2,9 @@
 
 import { z } from "zod";
 
-export const userSignupSchema = z.object({
+
+
+ const userSignupSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email format"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
@@ -11,7 +13,12 @@ export const userSignupSchema = z.object({
   role: z.enum(["user", "admin"])
 });
 
-export const userLoginSchema = z.object({
+ const userLoginSchema = z.object({
   email: z.string().email("Invalid email format"),
   password: z.string().min(6, "Password must be at least 6 characters long")
 });
+
+
+export const userValidation ={
+  userLoginSchema,userSignupSchema
+}
