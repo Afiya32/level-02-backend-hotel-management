@@ -6,7 +6,7 @@ Initialize a TypeScript project: Set up a new TypeScript project if you haven't 
 Install necessary packages:
 
 bash
-কোড কপি করুন
+
 npm install express mongoose body-parser jsonwebtoken bcrypt @types/express @types/mongoose @types/jsonwebtoken @types/bcrypt
 Create necessary folders and files:
 
@@ -15,7 +15,7 @@ Set up files like server.ts (main entry point), db.ts (MongoDB connection setup)
 Models
 User Model (user.model.ts)
 typescript
-কোড কপি করুন
+
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
@@ -30,7 +30,7 @@ const userSchema = new Schema({
 export default model('User', userSchema);
 Room Model (room.model.ts)
 typescript
-কোড কপি করুন
+
 import { Schema, model } from 'mongoose';
 
 const roomSchema = new Schema({
@@ -46,7 +46,7 @@ const roomSchema = new Schema({
 export default model('Room', roomSchema);
 Slot Model (slot.model.ts)
 typescript
-কোড কপি করুন
+
 import { Schema, model } from 'mongoose';
 
 const slotSchema = new Schema({
@@ -60,7 +60,7 @@ const slotSchema = new Schema({
 export default model('Slot', slotSchema);
 Booking Model (booking.model.ts)
 typescript
-কোড কপি করুন
+
 import { Schema, model } from 'mongoose';
 
 const bookingSchema = new Schema({
@@ -77,7 +77,7 @@ export default model('Booking', bookingSchema);
 Routes
 User Routes (user.routes.ts)
 typescript
-কোড কপি করুন
+
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
 
@@ -89,7 +89,7 @@ router.post('/login', UserController.login);
 export default router;
 Room Routes (room.routes.ts)
 typescript
-কোড কপি করুন
+
 import { Router } from 'express';
 import RoomController from '../controllers/room.controller';
 import authMiddleware from '../middlewares/auth';
@@ -105,7 +105,7 @@ router.delete('/rooms/:id', authMiddleware, RoomController.deleteRoom);
 export default router;
 Slot Routes (slot.routes.ts)
 typescript
-কোড কপি করুন
+
 import { Router } from 'express';
 import SlotController from '../controllers/slot.controller';
 import authMiddleware from '../middlewares/auth';
@@ -118,7 +118,7 @@ router.get('/slots/availability', SlotController.getAvailableSlots);
 export default router;
 Booking Routes (booking.routes.ts)
 typescript
-কোড কপি করুন
+
 import { Router } from 'express';
 import BookingController from '../controllers/booking.controller';
 import authMiddleware from '../middlewares/auth';
