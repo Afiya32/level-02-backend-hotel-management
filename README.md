@@ -137,3 +137,6 @@ Server (server.ts)
 Configure Express server (server.ts) to handle routes, middleware, error handling, etc.
 Set up MongoDB connection (db.ts) and integrate it with Mongoose.
 This structured approach ensures that your Meeting Room Booking System is well-organized, scalable, and maintains separation of concerns between different components of your backend application. Adjust routes and controllers as per your specific business logic and error handling requirements.
+
+
+live-link:https://assignment-03-five.vercel.app/
