@@ -15,19 +15,24 @@ import SlotModel from './slot.model';
 };
 
 // getting slot services
- const getAvailableSlotsDB = async (date: string, roomId?: string): Promise<Slot[]> => {
+const getAvailableSlotsDB = async (date?: string, roomId?: string): Promise<Slot[]> => {
     try {
-        let query: any = { date };
+        let query: any = {};
+        if (date) {
+            query.date = date;
+        }
         if (roomId) {
             query.room = roomId;
         }
 
-        const slots = await SlotModel.find(query);
+        const slots = await SlotModel.find(query).populate('room');
         return slots;
     } catch (error) {
+        console.error('Database Query Error:', error);
         throw error;
     }
 };
+
 
 export const slotServices={
     getAvailableSlotsDB,createSlotDB

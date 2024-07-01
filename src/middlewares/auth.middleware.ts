@@ -1,13 +1,17 @@
+// auth.middleware
+
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-
 interface User {
   role: string; 
- 
 }
 
- const authenticate = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
+interface AuthenticatedRequest extends Request {
+  user?: User;
+}
+
+const authenticate = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -21,7 +25,7 @@ interface User {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded: JwtPayload = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret") as JwtPayload;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret") as JwtPayload;
     req.user = decoded as User; 
     next();
   } catch (error) {
@@ -33,9 +37,8 @@ interface User {
   }
 };
 
- const authenticateAdmin = (req: Request & { user?: User }, res: Response, next: NextFunction) => {
+const authenticateAdmin = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   authenticate(req, res, () => {
-   
     if (req.user && req.user.role !== "admin") {
       return res.status(403).json({
         success: false,
@@ -47,7 +50,7 @@ interface User {
   });
 };
 
-export const authMiddleWare={
+export const authMiddleware = {
+  authenticate,
   authenticateAdmin,
-  authenticate
-}
+};

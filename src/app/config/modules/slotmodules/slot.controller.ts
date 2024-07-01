@@ -65,18 +65,28 @@ const minutesToTime = (minutes: number) => {
     }
 };
 // booking empty slot 
- const getAvailableSlots = async (req: Request, res: Response, next: NextFunction) => {
+const getAvailableSlots = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { date, roomId } = req.query;
 
-        let query: any = { date };
+        console.log('Received request to get available slots');
+        console.log('Query Parameters:', req.query);
+
+        let query: any = {};
+        if (date) {
+            query.date = date;
+        }
         if (roomId) {
             query.room = roomId;
         }
 
+        console.log('Constructed Query:', query);
+
         const slots = await SlotModel.find(query).populate('room');
 
-        if (!slots) {
+        console.log('Query Result:', slots);
+
+        if (!slots.length) {
             return res.status(404).json({
                 success: false,
                 statusCode: 404,
@@ -94,9 +104,11 @@ const minutesToTime = (minutes: number) => {
             data: availableSlots
         });
     } catch (error) {
+        console.error('Error getting available slots:', error);
         next(error);
     }
 };
+
  export const slotController={
     createSlot,getAvailableSlots
  }

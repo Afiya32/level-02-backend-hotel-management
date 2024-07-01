@@ -1,12 +1,7 @@
-import { bookingController } from './booking.controller';
-// booking routes
-
-
 import { Router } from 'express';
-
+import { bookingController } from './booking.controller';
 import authBookingMiddleware from '../../auth.booking.middleware';
 import adminMiddleware from '../../admin.middleware';
-
 
 const BookingRouter = Router();
 

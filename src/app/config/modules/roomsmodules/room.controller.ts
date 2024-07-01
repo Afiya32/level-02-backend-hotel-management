@@ -62,7 +62,7 @@ const getAllRooms = async (req: Request, res: Response, next: NextFunction) => {
 // update room 
 const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const room = await RoomServices.updateRoom (req.params.id, req.body);
+    const room = await RoomServices.updateRoom(req.params.id, req.body);
     if (!room) {
       return res.status(404).json({
         success: false,
@@ -80,6 +80,7 @@ const updateRoom = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
 // delete room
 const deleteRoom = async (req: Request, res: Response, next: NextFunction) => {
   try {
